@@ -1,16 +1,16 @@
 [
   {
     "id": "01",
-    "nick_name": "Ziga Zaga",
+    "name": "Ziga Zaga",
     "age": 21,
     "gender": "F",
     "picture": "http://placeimg.com/641/481/any",
     "info": "I luv u pinch anywhere!\uD83E\uDD2A",
-    "is_matched": true
+    "matched": true
   },
   {
     "id": "02",
-    "nick_name": "Zita Pita",
+    "name": "Zita Pita",
     "age": 32,
     "gender": "F",
     "picture": "http://placeimg.com/640/480/any",
@@ -18,11 +18,37 @@
   },
   {
     "id": "03",
-    "nick_name": "Joe Kekovich",
+    "name": "Joe Kekovich",
     "age": 40,
     "gender": "M",
     "picture": "http://placeimg.com/642/482/any",
     "info": "Im from Czech Wonderland. Woold u like sum bear \uD83C\uDF7B ?",
-    "is_matched": true
+    "matched": true
+  },
+  {
+    "id": "04",
+    "name": "Ziga Zaga 2",
+    "age": 21,
+    "gender": "F",
+    "picture": "http://placeimg.com/641/481/any",
+    "info": "I luv u pinch anywhere!\uD83E\uDD2A",
+    "matched": true
+  },
+  {
+    "id": "05",
+    "name": "Zita Pita 2",
+    "age": 32,
+    "gender": "F",
+    "picture": "http://placeimg.com/640/480/any",
+    "info": "Im angry beach \uD83D\uDE21"
+  },
+  {
+    "id": "06",
+    "name": "Joe Kekovich 2",
+    "age": 40,
+    "gender": "M",
+    "picture": "http://placeimg.com/642/482/any",
+    "info": "Im from Czech Wonderland. Woold u like sum bear \uD83C\uDF7B ?",
+    "matched": true
   }
 ]

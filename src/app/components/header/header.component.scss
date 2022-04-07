@@ -1,0 +1,17 @@
+@import "../../../variables";
+
+.app-header {
+  position: relative;
+  flex: 0 0 auto;
+
+  &__inner {
+    @extend %flex-row-center;
+  }
+
+  &__logo {
+    margin-right: $grid-rhythm-base*2;
+    width: 32px;
+    height: 32px;
+    font-size: 2rem;
+  }
+}

@@ -1,17 +1,6 @@
-<mat-toolbar
-  class="app-header"
-  color="accent"
-  role="banner"
->
-  <div class="app-header__inner container">
-    <mat-icon
-      class="app-header__logo"
-      aria-label="mans pinched man icon logo"
-    >sports_kabaddi
-    </mat-icon>
-    <span>Pinder zocial kekwork</span>
-  </div>
-</mat-toolbar>
+<app-header
+  [headerTitle]="'Pinder zocial kekwork'"
+></app-header>
 
 <main class="app-main">
   <div class="app-content container">
@@ -25,37 +14,4 @@
   </div>
 </main>
 
-<mat-toolbar
-  class="app-footer"
-  color="accent"
-  role="banner"
->
-  <div
-    class="app-footer__inner container"
-    role="navigation"
-  >
-    <a
-      href=""
-      title="home"
-      mat-icon-button
-    >
-      <mat-icon>home</mat-icon>
-    </a>
-    <a
-      href=""
-      title="your reactions list"
-      mat-icon-button
-    >
-      <mat-icon>rule</mat-icon>
-    </a>
-    <a
-      href=""
-      title="profile"
-      mat-icon-button
-    >
-      <mat-icon>person</mat-icon>
-    </a>
-  </div>
-</mat-toolbar>
-
-<div class="app-preloader"></div>
+<app-footer></app-footer>

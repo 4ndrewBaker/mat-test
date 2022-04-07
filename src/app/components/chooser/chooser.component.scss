@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "../../../variables";
 
 :host {
@@ -23,9 +24,8 @@
 }
 
 .app-card {
-  box-sizing: border-box;
   overflow: hidden;
-  border-radius: $grid-rhythm-base;
+  border-radius: math.round(math.div($grid-rhythm-base, 1.5));
   position: absolute;
   left: 50%;
   top: 50%;
@@ -35,7 +35,7 @@
   margin-left: -140px;
   user-select: none;
   will-change: transform;
-  transition: all 0.3s ease-in-out;
+  transition: all .25s ease-in-out;
   cursor: grab;
 
   &:before {
@@ -48,7 +48,15 @@
     content: '';
   }
 
-  &__picture {
+  .mat-card {
+    box-shadow: none;
+    box-sizing: border-box;
+    border-radius: $grid-rhythm-base;
+    height: 100%;
+    width: 100%;
+  }
+
+  .mat-card-image {
     position: relative;
     background-color: #dedede;
 
@@ -56,15 +64,32 @@
       content: '';
       display: block;
       width: 100%;
-      padding-top: percentage(3/4);
+      padding-top: percentage(math.div(3, 4));
     }
 
     img {
       position: absolute;
       top: 0;
       display: block;
+      opacity: 0;
+      transition: opacity .2s linear;
+      will-change: opacity;
     }
   }
+}
+
+.app-reactions {
+  pointer-events: none;
+}
+
+.app-reaction {
+  z-index: 1010;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center center;
+  transition: all .2s ease-in-out;
 }
 
 .app-empty {
