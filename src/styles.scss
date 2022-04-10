@@ -1,0 +1,42 @@
+@import "./variables";
+
+//* {
+//  &,
+//  &:before,
+//  &:after {
+//    box-sizing: border-box;
+//  }
+//}
+
+html, body {
+  overflow: hidden; // prevent viewport scroll on ios
+  height: 100%;
+  background-color: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: $roboto;
+}
+
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $grid-rhythm-base;
+  padding-right: $grid-rhythm-base;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    & + button {
+      margin-left: $grid-rhythm-base*4;
+    }
+  }
+}

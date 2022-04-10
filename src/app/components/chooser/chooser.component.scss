@@ -1,0 +1,73 @@
+@import "../../../variables";
+
+:host {
+  @extend %flex-column;
+}
+
+.app-canvas {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.app-cards {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 340px;
+  padding: $grid-rhythm-base*2 0;
+}
+
+.app-action {
+  flex: 0 0 auto;
+  padding: $grid-rhythm-base*2 0;
+}
+
+.app-card {
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: $grid-rhythm-base;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 280px;
+  height: 340px;
+  margin-top: -170px;
+  margin-left: -140px;
+  user-select: none;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: grab;
+
+  &:before {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+  }
+
+  &__picture {
+    position: relative;
+    background-color: #dedede;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      padding-top: percentage(3/4);
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      display: block;
+    }
+  }
+}
+
+.app-empty {
+  margin: auto;
+  text-align: center;
+}

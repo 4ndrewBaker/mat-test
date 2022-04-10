@@ -1,0 +1,63 @@
+@import "normalize-scss/sass/normalize";
+@import "../variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-header,
+.app-footer {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.app-header {
+  &__inner {
+    @extend %flex-row-center;
+  }
+
+  &__logo {
+    margin-right: $grid-rhythm-base*2;
+    width: 32px;
+    height: 32px;
+    font-size: 2rem;
+  }
+}
+
+.app-footer {
+  &__inner {
+    @extend %flex-row-center;
+    justify-content: space-around;
+  }
+}
+
+.app-main {
+  @extend %flex-column;
+  justify-content: center;
+}
+
+// TODO: fix
+//.app-title {
+//  margin-bottom: $grid-rhythm-base*3;
+//  line-height: 1.2;
+//  text-align: center;
+//}
+
+.app-content {
+  @extend %flex-column;
+  padding-top: $grid-rhythm-base*2;
+  padding-bottom: $grid-rhythm-base*2;
+}
+
+.app-preloader {
+  display: none;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: pink;
+}

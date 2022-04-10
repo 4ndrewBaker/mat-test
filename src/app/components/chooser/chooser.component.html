@@ -1,0 +1,78 @@
+<section class="app-canvas">
+  <ng-container *ngIf="cards$ | async as cards; else emptyTpl">
+    <div class="app-cards">
+      <mat-card
+        *ngFor="let card of cards; let i = index"
+        #pinderCard
+        class="app-card"
+        [ngClass]="{
+          'mat-elevation-z8': i === 0,
+          'mat-elevation-z2': i !== 0
+        }"
+        [ngStyle]="{
+        zIndex: cards.length - i,
+        transform: 'scale(' + (gUnit - i)/gUnit + ') translateY(-' + gUnit*i + 'px)'
+      }"
+      >
+        <div
+          class="app-card__picture"
+          mat-card-image
+        >
+          <img
+            #pinderCardImage
+            [src]="card.picture"
+            [attr.alt]="card.nick_name + ' profile photo'"
+            [attr.loading]="'lazy'"
+            (load)="pinderCardImage.style.opacity='1'"
+          />
+        </div>
+        <mat-card-content>
+          <mat-card-title>
+            {{card.nick_name}}
+            <ng-container *ngIf="card.age">
+              ,&nbsp;{{card.age}}
+            </ng-container>
+            ,&nbsp;{{card.gender}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{card.info}}
+          </mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="app-action button-group">
+      <button
+        mat-fab
+        color="accent"
+        (click)="$event"
+      >
+        <mat-icon aria-label="Like!">favorite</mat-icon>
+      </button>
+      <button
+        mat-fab
+        color="primary"
+        (click)="$event"
+      >
+        <mat-icon aria-label="Dislike!">block</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+</section>
+
+<ng-template #emptyTpl>
+  <div class="app-empty">
+    <h2>
+      Oops! There is absolutely NOTHING!<br>
+      Click button below:
+    </h2>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="getCards()"
+    >
+      <mat-icon>refresh</mat-icon>
+      <span style="margin-left:8px">Load cards</span>
+    </button>
+  </div>
+</ng-template>
