@@ -7,11 +7,11 @@
       <div
         *ngFor="let card of cards; let i = index"
         #pinderCard
-        class="app-card mat-elevation-z2"
+        class="app-card mat-elevation-z2 --cursor-grab"
         [ngStyle]="{
-        zIndex: cards.length - i,
-        transform: 'scale(' + (gUnit - i)/gUnit + ') translateY(-' + gUnit*i + 'px)'
-      }"
+          zIndex: cards.length - i,
+          transform: 'scale(' + (gUnit - i)/gUnit + ') translateY(-' + gUnit*i + 'px) rotate(' + i*0.5 + 'deg)'
+        }"
         (pan)="handlePan($event)"
         (panend)="handlePanEnd($event)"
         (transitionend)="handleShift()"
@@ -92,28 +92,66 @@
     </div>
   </ng-container>
 
+  <div
+    class="app-curtain"
+    cdkTrapFocus
+    [style.opacity]="isMatched ? '1' : '0'"
+    [style.visibility]="isMatched ? 'visible' : 'hidden'"
+    [attr.aria-hidden]="!isMatched"
+  >
+    <div class="app-curtain-title">
+      <h2>
+        GOTCHA! You've match!
+      </h2>
+      <i [class]="{'--animation-tada': isMatched}">🎉</i>
+    </div>
+    <button
+      mat-raised-button
+      type="button"
+      (click)="isMatched = !isMatched"
+    >Yep!
+    </button>
+  </div>
+
   <pre
     hidden
     class="mat-elevation-z10"
     style="position:absolute;top:0;left: 0;width:calc((100vw - 550px)/2);height: 100%;background-color:#efefef;z-index:1010;overflow: auto;margin: 0;padding: .5em;"
   >{{this.cards|json}}</pre>
-
 </section>
 
+
 <ng-template #emptyTpl>
-  <div class="app-empty">
-    <h2>
-      Oops! There is absolutely NOTHING!<br>
-      Click button below:
-    </h2>
-    <button
-      mat-raised-button
-      type="button"
-      color="primary"
-      (click)="getCards()"
-    >
-      <mat-icon>refresh</mat-icon>
-      <span style="margin-left:8px">Load cards</span>
-    </button>
+  <div class="app-card mat-elevation-z2 app-card--dummy">
+    <mat-card>
+      <div
+        class="app-card__picture"
+        mat-card-image
+      >
+        <img
+          #pinderCardImageDummy
+          src="/assets/none.webp"
+          alt="crying pepe"
+          (load)="pinderCardImageDummy.style.opacity='1'"
+        />
+      </div>
+      <mat-card-content>
+        <mat-card-subtitle>
+          Oops! There is absolutely NOTHING<br>
+          Click button below:
+        </mat-card-subtitle>
+        <mat-card-actions align="end">
+          <button
+            mat-raised-button
+            type="button"
+            color="accent"
+            (click)="getCards()"
+          >
+            <mat-icon>refresh</mat-icon>
+            <span style="margin-left:8px">Load cards</span>
+          </button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
   </div>
 </ng-template>

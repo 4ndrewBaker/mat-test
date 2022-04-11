@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { ChooserComponent } from './components/chooser/chooser.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
+    A11yModule,
   ],
   providers: [CardService],
   bootstrap: [AppComponent],

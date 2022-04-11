@@ -28,6 +28,7 @@ export class ChooserComponent implements OnInit, AfterViewInit {
   transitionInProgress: boolean = false;
   isLike: boolean = false;
   isDislike: boolean = false;
+  isMatched: boolean = false;
   pinderCardsArray: Array<ElementRef> = [];
   cardsLoaded$ = new BehaviorSubject(false);
   cards: PinderCard[] = [];
@@ -61,9 +62,9 @@ export class ChooserComponent implements OnInit, AfterViewInit {
     });
   };
 
-  private isMatchedHandle(match: boolean) {
+  public isMatchedHandle(match: boolean): void {
     if (!this.cards.length) return;
-    console.log('Gotcha!', match);
+    this.isMatched = match;
   }
 
   private toggleReaction(like: boolean, dislike: boolean) {
@@ -82,10 +83,6 @@ export class ChooserComponent implements OnInit, AfterViewInit {
     if (this.shiftRequired) {
       this.shiftRequired = false;
       this.cards.shift();
-
-      // if (!this.cards.length) {
-      //   this.getCards();
-      // }
     }
   };
 
@@ -100,7 +97,7 @@ export class ChooserComponent implements OnInit, AfterViewInit {
       this.handleShift();
     }
 
-    this.renderer.addClass(this.pinderCardsArray[0].nativeElement, 'mat-elevation-z8');
+    this.renderer.addClass(this.pinderCardsArray[0].nativeElement, '--moved');
 
     if (event.deltaX > 0) {
       this.toggleReaction(false, true);
@@ -127,6 +124,7 @@ export class ChooserComponent implements OnInit, AfterViewInit {
 
     if (keep) {
       this.renderer.setStyle(this.pinderCardsArray[0].nativeElement, 'transform', 'none');
+      this.renderer.removeClass(this.pinderCardsArray[0].nativeElement, '--moved');
       this.shiftRequired = false;
     } else {
       const endX = Math.max(Math.abs(event.velocityX) * this.moveOutWidth, this.moveOutWidth);
@@ -142,12 +140,8 @@ export class ChooserComponent implements OnInit, AfterViewInit {
         'transform', 'translate(' + toX + 'px, ' + ( toY + event.deltaY ) + 'px) rotate(' + rotate + 'deg)',
       );
 
-      this.renderer.removeClass(this.pinderCardsArray[0].nativeElement, 'mat-elevation-z8');
-
-      if (this.cards[0].matched) {
-        console.log('match!');
-      }
-
+      this.renderer.removeClass(this.pinderCardsArray[0].nativeElement, '--moved');
+      this.isMatchedHandle(!!this.cards[0]?.matched && this.isLike);
       this.shiftRequired = true;
     }
 
@@ -161,16 +155,13 @@ export class ChooserComponent implements OnInit, AfterViewInit {
 
     if (liked) {
       this.pinderCardsArray[0].nativeElement.style.transform = 'translate(-' + this.moveOutWidth + 'px, -120px) rotate(10deg)';
-
-      if (this.cards[0].matched) {
-        this.isMatchedHandle(this.cards[0].matched);
-      }
-
       this.toggleReaction(true, false);
     } else {
       this.pinderCardsArray[0].nativeElement.style.transform = 'translate(' + this.moveOutWidth + 'px, -120px) rotate(-10deg)';
       this.toggleReaction(false, true);
     }
+
+    this.isMatchedHandle(!!this.cards[0]?.matched && this.isLike);
 
     this.shiftRequired = true;
     this.transitionInProgress = true;
